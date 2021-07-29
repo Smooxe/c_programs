@@ -1,0 +1,14 @@
+
+
+Here is the collection of books: 
+# 1: berp by jon
+It has 100 pages and cost $10.00
+
+# 2: slip by jack
+It has 50 pages and cost $12.00
+
+# 3: gap by jill
+It has 300 pages and cost $30.00
+
+
+More books to come!
