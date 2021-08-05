@@ -1,22 +1,35 @@
 #include<stdio.h>
 
-unsigned setbits(unsigned x, int p, int n, unsigned y);
+int bin_search(int x, int v[], int n);
 
 int main(){
 	
-	unsigned int x = 150;
-	unsigned int y = 25;
-
-	printf("test: %d\n", ~(~0<<3)<<2 );
-	printf("x: %d\n", setbits(x, 4, 3, y));
+	int n = 10;
+	int v[10] = {1,2,3,4,5,6,7,8,9,10};
+	
+	int x = 8;
+	
+	printf("is %d in array: %d\n", x, bin_search(x, v, n));
 	
 	return 0;
 }
 
-unsigned setbits(unsigned x, int p, int n, unsigned y){
-	return x & ~(~(~0 << n) << (p+1-n)) | (y & ~(~0 << n)) << (p+1-n);
+int bin_search(int x, int v[], int n){
+	
+	int low, mid, high;
+	
+	low = 0;
+	high = n-1;
+	
+	while(low<=high){
+		mid = (low+high)/2;
+		if(x < v[mid]){ high = mid-1; }
+		else if(x > v[mid]){ low = mid+1; }
+		else{ return mid; }
+	}
+	
+	return -1;
 }
-
 
 
 
