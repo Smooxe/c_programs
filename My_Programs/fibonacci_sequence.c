@@ -11,7 +11,7 @@
 #define TRUE	1
 #define FALSE	0
 
-#define MAX_DEC 25000
+#define MAX_DIGIT 1000000
 #define NUM_END	-1
 
 char *get_user_input(char *user_input);
@@ -22,23 +22,26 @@ char *reverse_array(char *array, int length);
 
 int main(){
 	
-	char num_3[MAX_DEC+1];
+	char num_3[MAX_DIGIT+1];
 	char user_input[1000];
 	
 	int total_length = 0;
 	int segment = 0;
 	
-	segment = array_to_num(get_user_input(user_input));
+	printf("Enter the segment of the fibonacci sequence you wish to see.\n");
+	printf("Warining: Large numbers may take a bit of time.\n");
+	printf("Warning: Largest fibonacci segment digit count is: %d.\n", MAX_DIGIT);
+	printf("fibonacci segment: ");
 	
-	//if(IS_WIN){ system("cls"); }
-	//else{ system("clear"); }
+	segment = array_to_num(get_user_input(user_input));
 	
 	if(segment > 1){
 		printf("//************************************//\n\n");
 		printf("segment: %d\n", segment);
 		printf("number of digits: %d\n", total_length = fib(num_3, segment));
 		printf("fib sequence: ");
-		for(int i = 0; num_3[i] != NUM_END; i++){ printf("%d", num_3[i]); } putchar('\n');
+		for(int i = 0; num_3[i] != NUM_END; i++){ printf("%d", num_3[i]); } 
+		putchar('\n');
 		printf("\n//************************************//\n");
 		
 	}
@@ -53,7 +56,7 @@ int main(){
 	return 0;
 }
 
-/** get user input for what part of the fibanace squence to show. **/
+/** get user input for segment of the fibanace squence to show. **/
 char *get_user_input(char *user_input){
 	int i, c;
 	
@@ -70,12 +73,8 @@ int array_to_num(char *array){
 	int num = 0;
 	
 	int i;
-	do{		
-		for(i = 0; array[i] != '\0'; i++);
-		if(array[--i] < '0' || array[i] > '9'){ printf("please input a digit from 0-9\n"); }
-	}while(array[i] < '0' && array[i] > '9');
-	
-	for(i; i >= 0; i--){ num += (array[i]-'0')*dec_p; dec_p *= 10; }
+	for(i = 0; array[i] != '\0'; i++);
+	for(--i; i >= 0; i--){ num += (array[i]-'0')*dec_p; dec_p *= 10; }
 	
 	return num;
 }
@@ -83,14 +82,17 @@ int array_to_num(char *array){
 
 /** loop through the fibanace sequence. **/
 int fib(char *num_3, const int n){
-	char num_1[MAX_DEC], num_2[MAX_DEC];
+	char num_1[MAX_DIGIT], num_2[MAX_DIGIT];
 	num_1[0] = 0; num_2[0] = 1;
 	num_1[1] = num_2[1] = NUM_END;
 	
 	int total_length;
 	for(int i = 0; i < n-1; i++){
 		total_length = add_array(num_1, num_2, num_3);
-		for(int j = 0; j < total_length; j++){ num_1[j] = num_2[j]; num_2[j] = num_3[j]; }
+		for(int j = 0; j < total_length; j++){ 
+			num_1[j] = num_2[j]; 
+			num_2[j] = num_3[j]; 
+		}
 	}
 	
 	return total_length-1;
@@ -130,7 +132,7 @@ int add_array(char *num_1, char *num_2, char *num_3){
 char *reverse_array(char *array, int length){
 	
 	int i, j;
-	char temp_array[MAX_DEC];
+	char temp_array[MAX_DIGIT];
 	
 	for(i = length-1, j = 0; i >= 0; i--){ temp_array[j] = array[i]; j++; }
 	temp_array[j++] = NUM_END;
