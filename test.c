@@ -1,48 +1,68 @@
 #include<stdio.h>
+#include<string.h>
 #include<ctype.h>
 
-void shell_sort(int v[], int n);
-int stoi(char s[]);
+#define MAXLINE	1000
+#define BASE	10
+
+int get_line(char s[], int lim);
+int reverse_int(int num);
 
 int main(){
 	
-	int s[100] = {8,5,6,2,1};
+	char user_input[MAXLINE];
+	double coefficent;
+	int exponent = 0, power;
+
+	get_line(user_input, MAXLINE);
+	printf("%s\n", user_input);
 	
-	printf("s: ");
-	for(int i = 0; i < 5; i++){ printf("%d", s[i]); }
-	putchar('\n');
+	int i = 0;
+	for(coefficent = 0.0; isdigit(user_input[i]); i++){ coefficent = 10.0*coefficent+(user_input[i]-'0'); }
+	if(user_input[i] == '.'){ i++; }
+	for(power = 1.0; isdigit(user_input[i]); i++){
+		coefficent = 10.0*coefficent+(user_input[i]-'0');
+		power *= 10;
+	}
+	coefficent = coefficent/power;
 	
-	shell_sort(s, 5);
-	printf("s: ");
-	for(int i = 0; i < 5; i++){ printf("%d", s[i]); }
-	putchar('\n');
-	
+	printf("coefficent: %g\n", coefficent);
+	if(user_input[i] == 'e'){
+		for(++i; isdigit(user_input[i]); i++){ exponent = 10*exponent+(user_input[i]-'0'); }
+		printf("exponent: %d\n", exponent);	
+		for(i = 0; i < exponent; i++){
+			coefficent *= BASE;
+		}
+		printf("sn_coefficent: %g\n", coefficent);
+	}
+
 	return 0;
 }
 
-int stoi(char s[]){
-	int i, n , sign;
+int get_line(char s[], int lim){
+	int c, i;
 	
-	for(i = 0; isspace(s[i]); i++);
-	sign = (s[i] == '-') ? -1:1;
-	if(s[i] == '+' || s[i] == '-'){ i++; }
-	for(n = 0; isdigit(s[i]); i++){ n = 10*n + (s[i]-'0'); }
+	i = 0;
+	while(--lim > 0 && (c = getchar()) != EOF && c != '\n'){ s[i++] = c; }
+	if(c == '\n'){ s[i++] = c; }
+	s[i] = '\0';
 	
-	return sign*n;
+	return i;
 }
 
-void shell_sort(int v[], int n){
-	
-	int gap, i, j, temp;
-	
-	for(gap = n/2; gap > 0; gap /= 2){
-		for(i = gap; i < n; i++){
-			for(j = i-gap; j>=0 && v[j]>v[j+gap]; j-=gap){
-				temp = v[j];
-				v[j] = v[j+gap];
-				v[j+gap] = temp;
-			}
-		}
-	}
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

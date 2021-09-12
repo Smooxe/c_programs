@@ -1,25 +1,23 @@
 #include<stdio.h>
 #include<string.h>
 
-void dtob(int dec, int base);
+void dtob(char base_num[]);
 
 void reverse(char s[]);
 int main(){
-	
-	int dec = 100;
-	int base = 16;
 
 	char base_num[100];
 	
-	printf("dec: %d ", dec);
-	dtob(dec, base);
-	printf("base: %s\n", base_num);
+	dtob(base_num);
+	printf("output: %s\n", base_num);
 	
 	return 0;
 }
 
-void dtob(int dec, int base){
+void dtob(char base_num[]){
 	int i;
+	int dec = 100;
+	int base = 16;
 	for(i = 0; dec > 0; i++){
 		base_num[i] = (dec%base) > 9 ? 'A'+((dec%base)%10) : '0'+(dec%base);
 		dec/=base;
